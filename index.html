@@ -12,23 +12,31 @@
     <script src="aframe-markdown.js"></script>
 
     <style type="text/css" media="all">
-      body, html { width: 100%; height: 100%; padding: 0; margin: 0; font-family: sans-serif; }
+      body, html { width: 100%; height: 100%; padding: 0; margin: 0; font-family: sans-serif; background: black; }
       body { display: flex; }
-      #md { border: none; }
-      #md, #rendered-html, #aframe { width: 33.333%; margin: 0 1em; height: 100%; overflow-y: auto; }
+      #md { border: none; width: 100%; margin: 4em; }
+      #mdc, #html, #aframe { position: relative; width: 33.333%; margin: 0 1em; height: 100%; overflow-y: auto; background: white; display: flex; justify-content: center; }
       #rendered-html { width: 22.7em; }
       #rendered-html img { width: 100%; }
+      .label { position: absolute; top: 0; left: 0; z-index: 1; margin: 0.5em; padding: 0.5em; border: 1px solid black; background: white; }
     </style>
   </head>
   <body>
-    <textarea id="md"></textarea>
+    <div id="mdc">
+      <div class="label">Markdown</div>
+      <textarea id="md"></textarea>
+    </div>
     <div id="aframe">
+      <div class="label">A-Frame</div>
       <a-scene embedded background="color: white;">
         <a-entity id="mde" markdown position="-1 4 -3"></a-entity>
-        <a-entity camera position="0 1.6 0" look-controls wasd-controls="fly: true; wsAxis: y; wsInverted: true;"></a-entity>
+        <a-entity camera position="0 1.6 0" look-controls wasd-controls="fly: true; "></a-entity>
       </a-scene>
     </div>
-    <div id="rendered-html"></div>
+    <div id="html">
+      <div class="label">HTML</div>
+      <div id="rendered-html"></div>
+    </div>
     <script>
       (async () => {
         const resp = await fetch("test-basic.md");
