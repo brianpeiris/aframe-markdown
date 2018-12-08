@@ -28,7 +28,14 @@ AFRAME.registerComponent("markdown", {
         });
         const scale = parseFloat(window.getComputedStyle(node.parentNode).fontSize) / 8;
         textEl.setAttribute("scale", {x: scale, y: scale, z: scale});
-        textEl.setAttribute("position", {x: rect.left / 200 - offset / 200, y: -rect.top / 200});
+        let y;
+        if (node.previousSibling && node.previousSibling.nodeName === "BR") {
+          const brRect = node.previousSibling.getClientRects()[0];
+          y = -(brRect.top + brRect.height) / 200;
+        } else {
+          y = -rect.top / 200;
+        }
+        textEl.setAttribute("position", {x: rect.left / 200 - offset / 200, y});
         this.el.appendChild(textEl);
         break;
       case "IMG":
