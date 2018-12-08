@@ -1,0 +1,6 @@
+{
+  "name": "aframe-markdown",
+  "version": "0.1.0",
+  "description": "aframe-markdown renders markdown using SDF text.",
+  "license": "MIT"
+}
