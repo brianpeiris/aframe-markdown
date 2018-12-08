@@ -1,20 +1,19 @@
 # aframe-markdown
 
-Renders Markdown using SDF text in a-frame
+Renders Markdown using SDF text in a-frame.
 
 ## Supported Markdown Features
 
 - [x] Paragraphs
-  - [ ] * Line breaks
-  - [ ] Inline emphasis formatting
+  - [ ] Line breaks
 - [x] Headers
-- [ ] Blockquotes
-  - [ ] Blockquote styling
 - [x] Images
 - [x] Lists
   - [x] Nested lists
   - [x] Unordered lists
   - [ ] Ordered lists
+- [ ] Inline bold and italic formatting
+- [ ] Blockquotes
 - [ ] Horizontal rules
 - [ ] Tables
 - [ ] Code

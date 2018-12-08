@@ -16,30 +16,32 @@
       body { display: flex; }
       #md { border: none; }
       #md, #rendered-html, #aframe { width: 33.333%; margin: 0 1em; height: 100%; overflow-y: auto; }
-      #rendered-html { width: 22.9em; }
+      #rendered-html { width: 22.7em; }
       #rendered-html img { width: 100%; }
     </style>
   </head>
   <body>
     <textarea id="md"></textarea>
-    <div id="rendered-html"></div>
     <div id="aframe">
       <a-scene embedded background="color: white;">
         <a-entity id="mde" markdown position="-1 4 -3"></a-entity>
         <a-entity camera position="0 1.6 0" look-controls wasd-controls="fly: true; wsAxis: y; wsInverted: true;"></a-entity>
       </a-scene>
     </div>
+    <div id="rendered-html"></div>
     <script>
       (async () => {
-        const resp = await fetch("test.md");
+        const resp = await fetch("test-basic.md");
         const text = await resp.text();
         md.value = text;
         mde.setAttribute("markdown", {src: text});
-        md.addEventListener("keyup", () => mde.setAttribute("markdown", {src: md.value}));
+        md.addEventListener("keyup", () => {
+          mde.setAttribute("markdown", {src: md.value});
+        });
       })();
       document.addEventListener("DOMContentLoaded", () => {
         mde.addEventListener("rendered", () => {
-        OverlayScrollbars(document.getElementById("rendered-html"), {});
+          OverlayScrollbars(document.getElementById("rendered-html"), {});
         });
       });
     </script>
