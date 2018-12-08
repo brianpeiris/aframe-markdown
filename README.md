@@ -8,14 +8,14 @@ Renders Markdown using SDF text in a-frame
   - [ ] * Line breaks
   - [ ] Inline emphasis formatting
 - [x] Headers
-- [x] Blockquotes
-  - [ ] * Blockquote styling
+- [ ] Blockquotes
+  - [ ] Blockquote styling
 - [x] Images
 - [x] Lists
   - [x] Nested lists
   - [x] Unordered lists
-  - [ ] * Ordered lists
-- [ ] * Horizontal rules
+  - [ ] Ordered lists
+- [ ] Horizontal rules
 - [ ] Tables
 - [ ] Code
   - [ ] Inline code

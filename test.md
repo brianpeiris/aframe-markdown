@@ -59,15 +59,7 @@ Start numbering with offset:
 
 ## Emphasis
 
-**This is bold text**
-
-__This is bold text__
-
-*This is italic text*
-
-_This is italic text_
-
-~~Strikethrough~~
+This is **bold text** in the middle of a paragraph and some _italics_ as well.
 
 ## Blockquotes
 
@@ -86,7 +78,7 @@ _This is italic text_
 
 ## Code
 
-Inline `code`
+Inline `code` here
 
 Indented code
 
@@ -101,29 +93,3 @@ Block code "fences"
 ```
 Sample text here...
 ```
-
-Syntax highlighting
-
-``` js
-var foo = function (bar) {
-  return bar++;
-};
-
-console.log(foo(5));
-```
-
-## Links
-
-[link text](http://dev.nodeca.com)
-
-[link with title](http://nodeca.github.io/pica/demo/ "title text!")
-
-Autoconverted link https://github.com/nodeca/pica (enable linkify to see)
-
-Like links, Images also have a footnote style syntax
-
-![Alt text][id]
-
-With a reference later in the document defining the URL location:
-
-[id]: https://octodex.github.com/images/dojocat.jpg  "The Dojocat"
