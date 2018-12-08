@@ -21,6 +21,7 @@
         position: relative;
         top: 0; 
         left: 0;
+        overflow-y: auto;
       }
     </style>
   </head>
@@ -31,7 +32,7 @@
     </div>
     <div id="aframe">
       <div class="label">A-Frame</div>
-      <a-scene embedded background="color: white;" stats>
+      <a-scene embedded background="color: white;">
         <a-entity 
           id="mde" 
           markdown="
@@ -59,9 +60,10 @@
       })();
       document.addEventListener("DOMContentLoaded", () => {
         mde.addEventListener("rendered", () => {
-          html.appendChild(mde.components.markdown.renderedHtml);
-          mde.components.markdown.renderedHtml.classList.add("rendered");
-          OverlayScrollbars(document.getElementById("rendered-html"), {});
+          const { renderedHtml } = mde.components.markdown;
+          html.appendChild(renderedHtml);
+          renderedHtml.classList.add("rendered");
+          OverlayScrollbars(renderedHtml, {});
         });
       });
     </script>
