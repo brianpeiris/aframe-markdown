@@ -34,7 +34,7 @@ AFRAME.registerComponent("markdown", {
         const wrapCountDecrease = (rect.left / 200 * 20 - offset / 200 * 20);
         const bold = ["H1", "H2", "H3", "H4", "H5", "H6"].includes(node.parentNode.nodeName); 
         textEl.setAttribute("text", {
-          font: bold ? "./Roboto-Bold-msdf.json" : "roboto", negate: !bold,
+          font: bold ? "./Roboto-Bold-msdf.json" : "./vendor/aframe@0.8.2/Roboto-msdf.json", negate: !bold,
           value: node.textContent.replace(/\n/g, ''),
           anchor: 'left', baseline: 'top', color: "black",
           width: rect.width / 400,
