@@ -1,6 +1,8 @@
 AFRAME.registerComponent("markdown", {
   schema: {
-    src: { type: "string" }
+    src: { type: "string" },
+    normalFont: { type: "string" },
+    boldFont: { type: "string" },
   },
   _render(node, offset) {
     const scaleFactor = 200;
@@ -17,7 +19,7 @@ AFRAME.registerComponent("markdown", {
           numEl.setAttribute("value", start + nodeIndex + ".");
 
           numEl.setAttribute("color", "black");
-          numEl.setAttribute("font", "./vendor/aframe@0.8.2/Roboto-msdf.json");
+          numEl.setAttribute("font", this.data.normalFont);
           numEl.setAttribute("align", "right");
 
           const fontSize = parseFloat(style.fontSize) / 45;
@@ -53,7 +55,7 @@ AFRAME.registerComponent("markdown", {
         const bold = ["H1", "H2", "H3", "H4", "H5", "H6"].includes(node.parentNode.nodeName); 
 
         textEl.setAttribute("text", {
-          font: bold ? "./Roboto-Bold-msdf.json" : "./vendor/aframe@0.8.2/Roboto-msdf.json",
+          font: bold ? this.data.boldFont : this.data.normalFont,
           negate: !bold,
           value: node.textContent.replace(/\n/g, ''),
           anchor: 'left', baseline: 'top', color: "black",
