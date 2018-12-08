@@ -5,14 +5,28 @@ AFRAME.registerComponent("markdown", {
   _render(node, offset) {
     switch(node.nodeName) {
       case "LI":
-        const circleEl = document.createElement("a-circle");
         const liRect = node.getClientRects()[0];
-        const liScale = parseFloat(window.getComputedStyle(node).fontSize) / 8;
-        circleEl.setAttribute("radius", 0.008);
-        circleEl.setAttribute("color", "black");
-        circleEl.setAttribute("scale", {x: liScale, y: liScale, z: liScale});
-        circleEl.setAttribute("position", {x: liRect.left / 200 - offset / 200 - liScale / 50, y: -liRect.top / 200 - liScale / 70});
-        this.el.appendChild(circleEl);
+        const style = window.getComputedStyle(node);
+        if (style.listStyleType === "decimal") {
+          const numEl = document.createElement("a-text");
+          const start = node.parentNode.start;
+          numEl.setAttribute("value", start + Array.prototype.indexOf.call(node.parentNode.childNodes, node) + ".");
+          numEl.setAttribute("color", "black");
+          numEl.setAttribute("font", "./vendor/aframe@0.8.2/Roboto-msdf.json");
+          const liScale = parseFloat(style.fontSize) / 45;
+          numEl.setAttribute("scale", {x: liScale, y: liScale, z: liScale});
+          numEl.setAttribute("align", "right");
+          numEl.setAttribute("position", {x: liRect.left / 200 - offset / 200, y: -liRect.top / 200 - liScale / 16});
+          this.el.appendChild(numEl);
+        } else {
+          const circleEl = document.createElement("a-circle");
+          circleEl.setAttribute("radius", 0.008);
+          circleEl.setAttribute("color", "black");
+          const liScale = parseFloat(style.fontSize) / 8;
+          circleEl.setAttribute("scale", {x: liScale, y: liScale, z: liScale});
+          circleEl.setAttribute("position", {x: liRect.left / 200 - offset / 200 - liScale / 50, y: -liRect.top / 200 - liScale / 70});
+          this.el.appendChild(circleEl);
+        }
         break;
       case "#text":
         const textEl = document.createElement("a-entity");
