@@ -5,13 +5,13 @@ Renders Markdown using SDF text in a-frame.
 ## Supported Markdown Features
 
 - [x] Paragraphs
-  - [ ] Line breaks
+  - [x] Line breaks
 - [x] Headers
 - [x] Images
 - [x] Lists
   - [x] Nested lists
   - [x] Unordered lists
-  - [ ] Ordered lists
+  - [x] Ordered lists
 - [ ] Inline bold and italic formatting
 - [ ] Blockquotes
 - [ ] Horizontal rules
