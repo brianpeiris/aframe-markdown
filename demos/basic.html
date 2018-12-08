@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <script src="vendor/aframe@0.8.2/aframe.min.js"></script>
+    <script src="vendor/marked@0.5.2/marked.min.js"></script>
+
+    <script src="../aframe-markdown.js"></script>
+
+    <style type="text/css" media="all">
+    </style>
+  </head>
+  <body>
+    <a-scene background="color: white;">
+      <a-assets>
+        <a-asset-item id="md" src="./test-basic.md"></a-asset-item>
+      </a-assets>
+      <a-entity 
+        markdown="
+          src: #md;
+          normalFont: ./vendor/aframe@0.8.2/Roboto-msdf.json;
+          boldFont: ../fonts/Roboto-Bold-msdf.json;
+        "
+        position="-1 4 -3">
+      </a-entity>
+    </a-scene>
+  </body>
+</html>
+

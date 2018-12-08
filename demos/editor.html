@@ -16,9 +16,12 @@
       body { display: flex; }
       #md { border: none; width: 100%; margin: 4em; }
       #mdc, #html, #aframe { position: relative; width: 33.333%; margin: 0 1em; height: 100%; overflow-y: auto; background: white; display: flex; justify-content: center; }
-      #rendered-html { width: 22.7em; }
-      #rendered-html img { width: 100%; }
       .label { position: absolute; top: 0; left: 0; z-index: 1; margin: 0.5em; padding: 0.5em; border: 1px solid black; background: white; }
+      .aframe-markdown-rendered-html.rendered {
+        position: relative;
+        top: 0; 
+        left: 0;
+      }
     </style>
   </head>
   <body>
@@ -28,7 +31,7 @@
     </div>
     <div id="aframe">
       <div class="label">A-Frame</div>
-      <a-scene embedded background="color: white;">
+      <a-scene embedded background="color: white;" stats>
         <a-entity 
           id="mde" 
           markdown="
@@ -56,6 +59,8 @@
       })();
       document.addEventListener("DOMContentLoaded", () => {
         mde.addEventListener("rendered", () => {
+          html.appendChild(mde.components.markdown.renderedHtml);
+          mde.components.markdown.renderedHtml.classList.add("rendered");
           OverlayScrollbars(document.getElementById("rendered-html"), {});
         });
       });

@@ -1,8 +1,30 @@
+AFRAME.registerSystem("markdown", {
+  init() {
+    const style = document.createElement('style');
+    style.textContent = `
+      .aframe-markdown-rendered-html {
+        width: 22.7em;
+        position: absolute;
+        top: 0;
+        left: -9999px;
+      }
+      .aframe-markdown-rendered-html img {
+        width: 100%;
+      }
+    `;
+    document.head.prepend(style);
+  }
+});
 AFRAME.registerComponent("markdown", {
   schema: {
     src: { type: "string" },
     normalFont: { type: "string" },
     boldFont: { type: "string" },
+  },
+  init() {
+    this.renderedHtml = document.createElement("div");
+    this.renderedHtml.className = "aframe-markdown-rendered-html";
+    document.body.appendChild(this.renderedHtml);
   },
   _render(node, offset) {
     const scaleFactor = 200;
@@ -101,20 +123,24 @@ AFRAME.registerComponent("markdown", {
   },
   async update() {
     const template = document.createElement("template");
-    template.innerHTML = marked(this.data.src);
+    let node;
+    try {
+      node = document.querySelector(this.data.src);
+    } catch(e) {}
+    const src = node && node.data || this.data.src;
+    template.innerHTML = marked(src);
 
-    const rendered = document.getElementById("rendered-html");
-    rendered.innerHTML = "";
-    rendered.appendChild(template.content);
+    this.renderedHtml.innerHTML = "";
+    this.renderedHtml.appendChild(template.content);
 
     const imagePromises = [];
-    rendered.querySelectorAll("img").forEach(img => {
+    this.renderedHtml.querySelectorAll("img").forEach(img => {
       imagePromises.push(new Promise(resolve => img.addEventListener("load", resolve)));
     });
     await Promise.all(imagePromises);
 
     this.el.innerHTML = '';
-    this._traverse(document.getElementById("rendered-html"), rendered.getClientRects()[0].left);
+    this._traverse(this.renderedHtml, this.renderedHtml.getClientRects()[0].left);
 
     this.el.emit("rendered");
   }
