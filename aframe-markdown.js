@@ -3,7 +3,6 @@ AFRAME.registerSystem("markdown", {
     const style = document.createElement('style');
     style.textContent = `
       .aframe-markdown-rendered-html {
-        width: 22.7em;
         position: absolute;
         top: 0;
         left: -9999px;
@@ -15,11 +14,13 @@ AFRAME.registerSystem("markdown", {
     document.head.prepend(style);
   }
 });
+
 AFRAME.registerComponent("markdown", {
   schema: {
     src: { type: "string" },
     normalFont: { type: "string" },
     boldFont: { type: "string" },
+    wrapCount: { type: "number", default: 40 }
   },
   init() {
     this.renderedHtml = document.createElement("div");
@@ -82,7 +83,7 @@ AFRAME.registerComponent("markdown", {
           value: node.textContent.replace(/\n/g, ''),
           anchor: 'left', baseline: 'top', color: "black",
           width: rect.width / scaleFactor / 2,
-          wrapCount: 40 - wrapCountDecrease
+          wrapCount: this.data.wrapCount - wrapCountDecrease
         });
 
         const fontSize = parseFloat(window.getComputedStyle(node.parentNode).fontSize) / 8;
@@ -131,6 +132,7 @@ AFRAME.registerComponent("markdown", {
     template.innerHTML = marked(src);
 
     this.renderedHtml.innerHTML = "";
+    this.renderedHtml.style.width = `${this.data.wrapCount * 45.3 / 80}em`;
     this.renderedHtml.appendChild(template.content);
 
     const imagePromises = [];
