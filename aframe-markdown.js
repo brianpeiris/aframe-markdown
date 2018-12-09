@@ -38,8 +38,12 @@ AFRAME.registerComponent("markdown", {
           const numEl = document.createElement("a-text");
 
           const start = node.parentNode.start;
-          const nodeIndex = Array.prototype.indexOf.call(node.parentNode.childNodes, node);
-          numEl.setAttribute("value", start + nodeIndex + ".");
+          let nodeIndex = 0;
+          for (const childNode of node.parentNode.childNodes) {
+            if (childNode.nodeName === "LI") nodeIndex++;
+            if (childNode === node) break;
+          }
+          numEl.setAttribute("value", start + nodeIndex - 1 + ".");
 
           numEl.setAttribute("color", "black");
           numEl.setAttribute("font", this.data.normalFont);
