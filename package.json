@@ -2,5 +2,16 @@
   "name": "aframe-markdown",
   "version": "0.1.0",
   "description": "aframe-markdown renders markdown using SDF text.",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "start": "browser-sync start -s -w --no-open --no-notify --no-ghost-ui"
+  },
+  "dependencies": {
+    "aframe": "^0.8.2",
+    "marked": "^0.5.2"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.26.3",
+    "overlayscrollbars": "^1.6.1"
+  }
 }
