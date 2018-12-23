@@ -1,8 +1,17 @@
 AFRAME.registerSystem("markdown", {
+  schema: {
+    normalFont: { type: "string" },
+    boldFont: { type: "string" }
+  },
   init() {
     const style = document.createElement('style');
     style.textContent = `
+      @font-face {
+        font-family: "Roboto";
+        src: url("${this.data.normalFont}"), url("${this.data.boldFont}");
+      }
       .aframe-markdown-rendered-html {
+        font-family: "Roboto";
         position: absolute;
         top: 0;
         left: -9999px;
