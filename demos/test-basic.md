@@ -6,7 +6,7 @@ This is a paragraph.  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 Vestibulum tristique at nisi ut volutpat. 
 
 This is another paragraph.  Lorem ipsum dolor sit amet, consectetur adipiscing elit.  
-That was a line break. Vestibulum tristique at nisi ut volutpat. Aliquam vitae sodales justo. 
+That was a line break. Vestibulum tristique at nisi.
 
 ## Images
 
@@ -28,7 +28,6 @@ Ordered
 
 1. Lorem ipsum dolor sit amet
 2. Consectetur adipiscing elit
-3. Integer molestie lorem at massa
 
 Start numbering with offset:
 
