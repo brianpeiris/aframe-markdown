@@ -155,9 +155,28 @@ AFRAME.registerComponent("markdown", {
 
     this.container.innerHTML = '';
     const rect = this.renderedHtml.getClientRects()[0];
-    const scaleFactor = 200;
+    const scaleFactor = 300;
     this.container.object3D.position.set(-rect.width / scaleFactor / 2, rect.height / scaleFactor / 2, 0);
     this._traverse(this.renderedHtml, rect.left, scaleFactor);
+
+    // setTimeout(() => {
+    //   this.container.object3D.traverse(o => {
+    //     if (o.geometry && o.geometry.attributes.position){
+    //       var newPos = [];
+    //       var pos = o.geometry.attributes.position;
+    //       for (var i = 0, j = 0; i < pos.array.length; i += pos.itemSize, j += 3) {
+    //         newPos[j] = pos.array[i];
+    //         newPos[j + 1] = pos.array[i + 1];
+    //         newPos[j + 2] = (o.parent.position.y / o.scale.x - pos.array[i + 1]) + 2000;
+    //         newPos[j + 2] = -Math.sqrt(Math.pow(5000, 2) - Math.pow(newPos[j + 2], 2)) + 5000;
+    //       }
+    //       o.geometry.attributes.position.itemSize = 3;
+    //       o.geometry.attributes.position.setArray(Float32Array.from(newPos));
+    //       o.geometry.attributes.position.needsUpdate = true;
+    //       o.geometry.needsUpdate = true;
+    //     }
+    //   })    
+    // }, 1000);
 
     this.container.emit("rendered");
   }
