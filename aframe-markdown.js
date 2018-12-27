@@ -27,17 +27,16 @@ AFRAME.registerSystem("markdown", {
 AFRAME.registerComponent("markdown", {
   schema: {
     src: { type: "string" },
-    normalFont: { type: "string" },
-    boldFont: { type: "string" },
     wrapCount: { type: "number", default: 40 }
   },
   init() {
     this.renderedHtml = document.createElement("div");
     this.renderedHtml.className = "aframe-markdown-rendered-html";
     document.body.appendChild(this.renderedHtml);
+    this.container = document.createElement("a-entity");
+    this.el.appendChild(this.container);
   },
-  _render(node, offset) {
-    const scaleFactor = 200;
+  _render(node, offset, scaleFactor) {
     offset = offset / scaleFactor;
     switch(node.nodeName) {
       case "LI":
@@ -55,7 +54,7 @@ AFRAME.registerComponent("markdown", {
           numEl.setAttribute("value", start + nodeIndex - 1 + ".");
 
           numEl.setAttribute("color", "black");
-          numEl.setAttribute("font", this.data.normalFont);
+          numEl.setAttribute("font", this.system.data.normalFont);
           numEl.setAttribute("align", "right");
 
           const fontSize = parseFloat(style.fontSize) / 45;
@@ -66,7 +65,7 @@ AFRAME.registerComponent("markdown", {
             y: -liRect.top / scaleFactor - fontSize / 16
           });
 
-          this.el.appendChild(numEl);
+          this.container.appendChild(numEl);
         } else {
           const circleEl = document.createElement("a-circle");
           circleEl.setAttribute("radius", 0.008);
@@ -80,7 +79,7 @@ AFRAME.registerComponent("markdown", {
             y: -liRect.top / scaleFactor - fontSize / 70
           });
 
-          this.el.appendChild(circleEl);
+          this.container.appendChild(circleEl);
         }
         break;
       case "#text":
@@ -91,7 +90,7 @@ AFRAME.registerComponent("markdown", {
         const bold = ["H1", "H2", "H3", "H4", "H5", "H6"].includes(node.parentNode.nodeName); 
 
         textEl.setAttribute("text", {
-          font: bold ? this.data.boldFont : this.data.normalFont,
+          font: bold ? this.system.data.boldFont : this.system.data.normalFont,
           negate: !bold,
           value: node.textContent.replace(/\n/g, ''),
           anchor: 'left', baseline: 'top', color: "black",
@@ -112,7 +111,7 @@ AFRAME.registerComponent("markdown", {
 
         textEl.setAttribute("position", {x: rect.left / scaleFactor - offset, y});
 
-        this.el.appendChild(textEl);
+        this.container.appendChild(textEl);
         break;
       case "IMG":
         const imgEl = document.createElement("a-image");
@@ -125,14 +124,14 @@ AFRAME.registerComponent("markdown", {
           x: imgRect.width / scaleFactor / 2,
           y: -imgRect.top / scaleFactor - imgRect.height / scaleFactor / 2
         });
-        this.el.appendChild(imgEl);
+        this.container.appendChild(imgEl);
         break;
     }
   },
-  _traverse(node, offset) {
-    this._render(node, offset);
+  _traverse(node, offset, scaleFactor) {
+    this._render(node, offset, scaleFactor);
     for (const child of node.childNodes) {
-      this._traverse(child, offset);
+      this._traverse(child, offset, scaleFactor);
     }
   },
   async update() {
@@ -154,9 +153,12 @@ AFRAME.registerComponent("markdown", {
     });
     await Promise.all(imagePromises);
 
-    this.el.innerHTML = '';
-    this._traverse(this.renderedHtml, this.renderedHtml.getClientRects()[0].left);
+    this.container.innerHTML = '';
+    const rect = this.renderedHtml.getClientRects()[0];
+    const scaleFactor = 200;
+    this.container.object3D.position.set(-rect.width / scaleFactor / 2, rect.height / scaleFactor / 2, 0);
+    this._traverse(this.renderedHtml, rect.left, scaleFactor);
 
-    this.el.emit("rendered");
+    this.container.emit("rendered");
   }
 });

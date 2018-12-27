@@ -13,18 +13,12 @@
     </style>
   </head>
   <body>
-    <a-scene background="color: white;">
+    <a-scene markdown="normalFont: ../fonts/Roboto-msdf.json; boldFont: ../fonts/Roboto-Bold-msdf.json;" background="color: white;">
       <a-assets>
         <a-asset-item id="md" src="./test-basic.md"></a-asset-item>
       </a-assets>
-      <a-entity 
-        markdown="
-          src: #md;
-          normalFont: ../fonts/Roboto-msdf.json;
-          boldFont: ../fonts/Roboto-Bold-msdf.json;
-        "
-        position="-1 4 -3">
-      </a-entity>
+      <a-box color="red" position="0 0 -3"></a-box>
+      <a-entity markdown="src: #md" position="0 0 -3"></a-entity>
     </a-scene>
   </body>
 </html>
