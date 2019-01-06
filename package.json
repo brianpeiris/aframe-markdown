@@ -11,6 +11,8 @@
     "marked": "^0.5.2"
   },
   "devDependencies": {
+    "aframe-environment-component": "^1.1.0",
+    "aframe-extras": "^5.0.1",
     "browser-sync": "^2.26.3",
     "overlayscrollbars": "^1.6.1"
   }

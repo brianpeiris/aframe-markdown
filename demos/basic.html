@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width" />
 
     <script src="../node_modules/aframe/dist/aframe-master.js"></script>
+    <script src="../node_modules/aframe-extras/dist/aframe-extras.controls.min.js"></script>
+    <script src="../node_modules/aframe-environment-component/dist/aframe-environment-component.min.js"></script>
     <script src="../node_modules/marked/marked.min.js"></script>
 
     <script src="../aframe-markdown.js"></script>
@@ -15,9 +17,24 @@
   <body>
     <a-scene markdown="normalFont: ../fonts/Roboto-msdf.json; boldFont: ../fonts/Roboto-Bold-msdf.json;" background="color: white;">
       <a-assets>
-        <a-asset-item id="md" src="./test-basic.md"></a-asset-item>
+        <a-asset-item id="gasket" src="./gasket.md"></a-asset-item>
+        <a-asset-item id="test-basic" src="./test-basic.md"></a-asset-item>
+        <a-asset-item id="knitting" src="./knitting.md"></a-asset-item>
+        <a-mixin id="offset" position="0 0 -1"></a-asset-item>
       </a-assets>
-      <a-entity id="mde" markdown="src: #md" position="0 1.6 -2"></a-entity>
+      <a-entity environment="preset: forest"></a-entity>
+      <a-entity position="0 1.6 0">
+        <a-entity rotation="0 -60 0">
+          <a-entity markdown="src: #gasket; wrapCount: 80" mixin="offset"></a-entity>
+        </a-entity>
+        <a-entity rotation="0 0 0">
+          <a-entity markdown="src: #test-basic" mixin="offset"></a-entity>
+        </a-entity>
+        <a-entity rotation="0 60 0">
+          <a-entity markdown="src: #knitting; wrapCount: 60" mixin="offset"></a-entity>
+        </a-entity>
+      </a-entity>
+      <a-entity movement-controls="fly: true; speed: 0.1;"><a-entity position="0 1.6 0" look-controls camera></a-entity></a-entity>
     </a-scene>
   </body>
 </html>

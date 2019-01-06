@@ -2,17 +2,14 @@
 
 ## Paragraphs
 
-This is a paragraph.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-Vestibulum tristique at nisi ut volutpat. 
-
-This is another paragraph.  Lorem ipsum dolor sit amet, consectetur adipiscing elit.  
+This is a paragraph.  Lorem ipsum dolor sit amet, consectetur adipiscing elit.  
 That was a line break. Vestibulum tristique at nisi.
 
 ## Images
 
 This is an image:
 
-![A labrador](labrador.jpg)
+![](labrador.jpg)
 
 Followed by a paragraph
 
@@ -21,7 +18,7 @@ Followed by a paragraph
 Unordered
 
 + Sub-lists are made by indenting 2 spaces:
-  - Nulla volutpat aliquam velit
+  - Nulla volutpat aliquam velit wrapping works in lists too
 + Very easy!
 
 Ordered

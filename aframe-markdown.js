@@ -8,7 +8,9 @@ AFRAME.registerSystem("markdown", {
     style.textContent = `
       @font-face {
         font-family: "Roboto";
-        src: url("${this.data.normalFont}"), url("${this.data.boldFont}");
+        src: 
+          url("${this.data.normalFont.replace("-msdf.json", ".ttf")}"),
+          url("${this.data.boldFont.replace("-msdf.json", ".ttf")}");
       }
       .aframe-markdown-rendered-html {
         font-family: "Roboto";
@@ -27,7 +29,8 @@ AFRAME.registerSystem("markdown", {
 AFRAME.registerComponent("markdown", {
   schema: {
     src: { type: "string" },
-    wrapCount: { type: "number", default: 40 }
+    wrapCount: { type: "number", default: 40 },
+    padding: { type: "number", default: 0.05 }
   },
   init() {
     this.renderedHtml = document.createElement("div");
@@ -57,7 +60,7 @@ AFRAME.registerComponent("markdown", {
           numEl.setAttribute("font", this.system.data.normalFont);
           numEl.setAttribute("align", "right");
 
-          const fontSize = parseFloat(style.fontSize) / 45;
+          const fontSize = parseFloat(style.fontSize) / scaleFactor * 4.44;
           numEl.setAttribute("scale", {x: fontSize, y: fontSize, z: fontSize});
 
           numEl.setAttribute("position", {
@@ -68,10 +71,11 @@ AFRAME.registerComponent("markdown", {
           this.container.appendChild(numEl);
         } else {
           const circleEl = document.createElement("a-circle");
+          circleEl.setAttribute("segments", 8);
           circleEl.setAttribute("radius", 0.008);
           circleEl.setAttribute("color", "black");
 
-          const fontSize = parseFloat(style.fontSize) / 8;
+          const fontSize = parseFloat(style.fontSize) / scaleFactor * 25;
           circleEl.setAttribute("scale", {x: fontSize, y: fontSize, z: fontSize});
 
           circleEl.setAttribute("position", {
@@ -114,9 +118,11 @@ AFRAME.registerComponent("markdown", {
         this.container.appendChild(textEl);
         break;
       case "IMG":
+        if (node.naturalWidth === 0) return;
         const imgEl = document.createElement("a-image");
         const imgRect = node.getClientRects()[0];
         imgEl.setAttribute("src", node.src);
+        imgEl.setAttribute("side", "front");
         imgEl.setAttribute("scale", {
           x: imgRect.width / scaleFactor,
           y: imgRect.height / scaleFactor});
@@ -136,11 +142,13 @@ AFRAME.registerComponent("markdown", {
   },
   async update() {
     const template = document.createElement("template");
+
     let node;
     try {
       node = document.querySelector(this.data.src);
     } catch(e) {}
-    const src = node && node.data || this.data.src;
+    const src = node ? node.data : this.data.src;
+
     template.innerHTML = marked(src);
 
     this.renderedHtml.innerHTML = "";
@@ -149,34 +157,29 @@ AFRAME.registerComponent("markdown", {
 
     const imagePromises = [];
     this.renderedHtml.querySelectorAll("img").forEach(img => {
-      imagePromises.push(new Promise(resolve => img.addEventListener("load", resolve)));
+      if (img.complete) return;
+      imagePromises.push(new Promise((resolve, reject) => {
+        img.addEventListener("load", resolve);
+        img.addEventListener("error", () => {
+          console.warn(`markdown: Image failed to load - ${img.src}`);
+          resolve();
+        });
+      }));
     });
     await Promise.all(imagePromises);
 
     this.container.innerHTML = '';
     const rect = this.renderedHtml.getClientRects()[0];
-    const scaleFactor = 300;
+    const scaleFactor = 600;
     this.container.object3D.position.set(-rect.width / scaleFactor / 2, rect.height / scaleFactor / 2, 0);
     this._traverse(this.renderedHtml, rect.left, scaleFactor);
 
-    // setTimeout(() => {
-    //   this.container.object3D.traverse(o => {
-    //     if (o.geometry && o.geometry.attributes.position){
-    //       var newPos = [];
-    //       var pos = o.geometry.attributes.position;
-    //       for (var i = 0, j = 0; i < pos.array.length; i += pos.itemSize, j += 3) {
-    //         newPos[j] = pos.array[i];
-    //         newPos[j + 1] = pos.array[i + 1];
-    //         newPos[j + 2] = (o.parent.position.y / o.scale.x - pos.array[i + 1]) + 2000;
-    //         newPos[j + 2] = -Math.sqrt(Math.pow(5000, 2) - Math.pow(newPos[j + 2], 2)) + 5000;
-    //       }
-    //       o.geometry.attributes.position.itemSize = 3;
-    //       o.geometry.attributes.position.setArray(Float32Array.from(newPos));
-    //       o.geometry.attributes.position.needsUpdate = true;
-    //       o.geometry.needsUpdate = true;
-    //     }
-    //   })    
-    // }, 1000);
+    const background = document.createElement('a-plane');
+    background.setAttribute('position', `${rect.width / scaleFactor / 2} ${-rect.height/ scaleFactor / 2} -0.001`);
+    background.setAttribute('scale', `${rect.width / scaleFactor + this.data.padding} ${rect.height/ scaleFactor + this.data.padding} 1`);
+    background.setAttribute('roughness', 1);
+    background.setAttribute('side', 'double');
+    this.container.appendChild(background);
 
     this.container.emit("rendered");
   }

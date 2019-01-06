@@ -6,6 +6,7 @@
 
     <link href="../node_modules/overlayscrollbars/css/OverlayScrollbars.min.css" rel="stylesheet" />
     <script src="../node_modules/aframe/dist/aframe-master.js"></script>
+    <script src="../node_modules/aframe-extras/dist/aframe-extras.controls.min.js"></script>
     <script src="../node_modules/marked/marked.min.js"></script>
     <script src="../node_modules/overlayscrollbars/js/OverlayScrollbars.min.js"></script>
 
@@ -54,13 +55,13 @@
     </div>
     <div id="aframe">
       <div class="label">A-Frame</div>
-      <a-scene markdown="normalFont: ../fonts/Roboto-Regular.ttf; boldFont: ../fonts/Roboto-Bold.ttf; " embedded background="color: white;">
+      <a-scene markdown="normalFont: ../fonts/Roboto-msdf.json; boldFont: ../fonts/Roboto-Bold-msdf.json; " embedded background="color: white;">
         <a-entity 
           id="mde" 
           markdown="wrapCount: 40"
-          position="-1 4 -3">
+          position="0 1.6 -1">
         </a-entity>
-        <a-entity camera position="0 1.6 0" look-controls wasd-controls="fly: true; "></a-entity>
+        <a-entity movement-controls="fly: true; speed: 0.1;"><a-entity position="0 1.6 0" look-controls camera></a-entity></a-entity>
       </a-scene>
     </div>
     <div id="html">
