@@ -12,7 +12,7 @@
   "scripts": {
     "start": "webpack-dev-server --mode development",
     "build": "webpack --mode production --devtool source-map",
-    "deploy": "npm run build && gh-pages -d . -s '?(demos|dist)/**'"
+    "deploy": "npm run build && gh-pages -d . -s '?(demos|dist|fonts)/**'"
   },
   "peerDependencies": {
     "aframe": "^0.8.2"
