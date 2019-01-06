@@ -1,6 +1,6 @@
 {
   "name": "aframe-markdown",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "aframe-markdown renders markdown using SDF text.",
   "license": "MIT",
   "repository": "github:brianpeiris/aframe-markdown",
