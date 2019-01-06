@@ -4,7 +4,9 @@
 
 Renders Markdown using SDF text in a-frame.
 
-Demos: https://brianpeiris.github.io/aframe-markdown/demos/index.html
+Demos: https://brianpeiris.github.io/aframe-markdown/demos/
+
+Glitch: https://aframe-markdown.glitch.me/
 
 ![screen shot of basic demo](demos/screenshot.jpg)
 
