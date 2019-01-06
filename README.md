@@ -6,8 +6,7 @@ Renders Markdown using SDF text in a-frame.
 
 |Properties|Description|Default|
 |-|-|-|
-|src|The source for the markdown to render. Either the actual markdown text, or a selector to an a-asset-item that
-loads the markdown||
+|src|The source for the markdown to render. Either the actual markdown text, or a selector to an a-asset-item that loads the markdown||
 |wrapCount|Number of characters before wrapping text (more or less).|40|
 |padding|Padding in meters between the background and the text|0.05|
 
