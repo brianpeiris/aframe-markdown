@@ -6,7 +6,7 @@
   "repository": "github:brianpeiris/aframe-markdown",
   "browser": "dist/aframe-markdown.js",
   "files": [
-    "aframe-markdown.js",
+    "dist/**",
     "fonts/**"
   ],
   "scripts": {
