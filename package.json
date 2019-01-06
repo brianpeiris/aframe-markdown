@@ -3,11 +3,18 @@
   "version": "0.1.0",
   "description": "aframe-markdown renders markdown using SDF text.",
   "license": "MIT",
+  "main": "aframe-markdown.js",
+  "files": [
+    "aframe-markdown.js",
+    "fonts/**"
+  ],
   "scripts": {
     "start": "browser-sync start -s -w --no-open --no-notify --no-ghost-ui"
   },
+  "peerDependencies": {
+    "aframe": "^0.8.2"
+  },
   "dependencies": {
-    "aframe": "^0.8.2",
     "marked": "^0.5.2"
   },
   "devDependencies": {
