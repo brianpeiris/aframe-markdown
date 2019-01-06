@@ -12,12 +12,11 @@ Glitch: https://aframe-markdown.glitch.me/
 
 ## Usage
 
-```
+```html
 <a-scene 
-  background="color: lightblue"
   markdown="
-	normalFont: https://unpkg.com/aframe-markdown/fonts/Roboto-msdf.json; 
-	boldFont: https://unpkg.com/aframe-markdown/fonts/Roboto-Bold-msdf.json;
+    normalFont: https://unpkg.com/aframe-markdown/fonts/Roboto-msdf.json; 
+    boldFont: https://unpkg.com/aframe-markdown/fonts/Roboto-Bold-msdf.json;
   "
 >
   <a-assets>
@@ -25,7 +24,6 @@ Glitch: https://aframe-markdown.glitch.me/
   </a-assets>
   <a-entity markdown="src: #md" position="0 1.5 -1"></a-entity>
 </a-scene>
-
 ```
 
 ## Component Properties
