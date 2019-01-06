@@ -10,13 +10,38 @@ Glitch: https://aframe-markdown.glitch.me/
 
 ![screen shot of basic demo](demos/screenshot.jpg)
 
-## Properties
+## Usage
+
+```
+<a-scene 
+  background="color: lightblue"
+  markdown="
+	normalFont: https://unpkg.com/aframe-markdown/fonts/Roboto-msdf.json; 
+	boldFont: https://unpkg.com/aframe-markdown/fonts/Roboto-Bold-msdf.json;
+  "
+>
+  <a-assets>
+	<a-asset-item id="md" src="test.md"></a-asset-item>
+  </a-assets>
+  <a-entity markdown="src: #md" position="0 1.5 -1"></a-entity>
+</a-scene>
+
+```
+
+## Component Properties
 
 |Properties|Description|Default|
 |-|-|-|
 |src|The source for the markdown to render. Either the actual markdown text, or a selector to an a-asset-item that loads the markdown||
 |wrapCount|Number of characters before wrapping text (more or less).|40|
 |padding|Padding in meters between the background and the text|0.05|
+
+## System Properties
+
+|Properties|Description|Default|
+|-|-|-|
+|normalFont|URL to the msdf.json file for the normal weight font||
+|normalFont|URL to the msdf.json file for the bold font||
 
 ## Supported Markdown Features
 
