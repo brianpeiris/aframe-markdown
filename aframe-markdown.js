@@ -41,6 +41,8 @@ AFRAME.registerComponent("markdown", {
   },
   _render(node, offset, scaleFactor) {
     offset = offset / scaleFactor;
+    // Note: There are lots of magic numbers here. These will probably only work will for the default Roboto font.
+    // In theory you could calculate all the adjustments correctly based off the actual text metrics instead.
     switch(node.nodeName) {
       case "LI":
         const liRect = node.getClientRects()[0];

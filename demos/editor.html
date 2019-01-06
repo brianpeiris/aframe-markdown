@@ -73,8 +73,14 @@
         const text = await resp.text();
         md.value = text;
         mde.setAttribute("markdown", {src: text});
+        let lastVal = text;
         md.addEventListener("keyup", () => {
+          if (md.value === lastVal) return;
+          const { renderedHtml } = mde.components.markdown;
+          OverlayScrollbars(renderedHtml, {}).destroy();
+          renderedHtml.classList.remove("rendered");
           mde.setAttribute("markdown", {src: md.value});
+          lastVal = md.value;
         });
       })();
       document.addEventListener("DOMContentLoaded", () => {
