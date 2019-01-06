@@ -2,7 +2,7 @@
 
 [![](https://img.shields.io/npm/v/aframe-markdown.svg)](https://www.npmjs.com/package/aframe-markdown)
 
-Renders Markdown using SDF text in a-frame.
+Renders Markdown using SDF text in A-Frame.
 
 Demos: https://brianpeiris.github.io/aframe-markdown/demos/
 
