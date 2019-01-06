@@ -1,3 +1,5 @@
+import marked from "marked";
+
 AFRAME.registerSystem("markdown", {
   schema: {
     normalFont: { type: "string" },
