@@ -4,7 +4,7 @@ Renders Markdown using SDF text in a-frame.
 
 ## Properties
 
-|Properties|Description|Default Value|
+|Properties|Description|Default|
 |-|-|-|
 |src|The source for the markdown to render. Either the actual markdown text, or a selector to an a-asset-item that
 loads the markdown||
