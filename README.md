@@ -2,6 +2,8 @@
 
 Renders Markdown using SDF text in a-frame.
 
+![screen shot of basic demo](demos/screenshot.png)
+
 ## Properties
 
 |Properties|Description|Default|
