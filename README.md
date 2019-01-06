@@ -8,7 +8,7 @@ Demos: https://brianpeiris.github.io/aframe-markdown/demos/
 
 Glitch: https://aframe-markdown.glitch.me/
 
-![screen shot of basic demo](demos/screenshot.jpg)
+![screen shot of basic demo](demos/basic-screenshot.jpg)
 
 ## Usage
 
